@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Josefin Sans;
+}
+
+
+/* Footer  */
+/* Footer Background */
+.bg-light-custom {
+  background-color: #fff1cc; /* Same as your screenshot */
+}
+
+/* Footer Links */
+.footer-link {
+  color: #15227a; /* Dark blue like screenshot */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #0d6efd; /* Bootstrap primary */
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.social-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+
+/* Responsive text adjustments */
+@media (min-width: 992px) {
+  .footer h5, .footer h6 {
+    font-size: 1.5rem;
+  }
+  .footer-link {
+    font-size: 1.10rem;
+  }
+}

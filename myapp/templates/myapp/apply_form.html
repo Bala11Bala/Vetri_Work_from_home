@@ -1,0 +1,126 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+
+{% block title %}
+    Job Apply Form
+{% endblock title %}
+
+{% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"
+         style="background-color: 
+                {% if message.tags == 'error' %}#f8d7da{% elif message.tags == 'success' %}#d1e7dd{% elif message.tags == 'warning' %}#fff3cd{% else %}#cfe2ff{% endif %};
+                color: {% if message.tags == 'error' %}#842029{% elif message.tags == 'success' %}#0f5132{% elif message.tags == 'warning' %}#664d03{% else %}#084298{% endif %};
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid 
+                {% if message.tags == 'error' %}#f5c2c7{% elif message.tags == 'success' %}#badbcc{% elif message.tags == 'warning' %}#ffecb5{% else %}#b6d4fe{% endif %};
+                margin-bottom: 20px;">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+<div class="container py-5">
+  <h3 class="text-center fw-bold mb-4">Fill the Details</h3>
+
+  <form method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm bg-white">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+      <label class="form-label">Full Name*</label>
+      <input type="text" name="full_name" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Email*</label>
+      <input type="email" name="email" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Mobile Number*</label>
+      <input type="text" name="mobile" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Current City*</label>
+      <input type="text" name="city" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Gender*</label><br>
+      <input type="radio" name="gender" value="male"> Male
+      <input type="radio" name="gender" value="female"> Female
+      <input type="radio" name="gender" value="other"> Other
+    </div>
+
+    <div class="mb-3">
+      <label>Languages Known*</label>
+      <input type="text" name="languages" class="form-control" placeholder="English, Tamil, Hindi" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Work Status*</label>
+      <input type="text" name="work_status" class="form-control" placeholder="Experienced / Fresher" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Year of Experience*</label>
+      <input type="text" name="experience_years" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Educational Qualification*</label>
+      <input type="text" name="qualification" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Passed Out Year*</label>
+      <input type="text" name="passed_out_year" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Upload Profile Image*</label>
+      <input type="file" name="profile_image" accept="image/*" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Upload Resume*</label>
+      <input type="file" name="resume" accept=".pdf,.doc,.docx" class="form-control" required>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="updates_optin">
+      <label class="form-check-label">Send me updates via Email/SMS</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary mx-auto mt-5" style="background-color: #172B85;">Submit</button>
+  </form>
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+  // Auto close all alerts after 3 seconds (3000ms)
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      setTimeout(() => {
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+        bsAlert.close();
+      }, 3000);
+    });
+  });
+</script>
+{% endblock %}

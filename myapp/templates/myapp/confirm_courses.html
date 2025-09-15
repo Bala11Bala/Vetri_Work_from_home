@@ -1,0 +1,230 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  /* Interview Questions Card Style */
+  .interview-box {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .interview-box:hover {
+    transform: translateY(-5px);
+  }
+
+  .interview-box img {
+    width: 40px;
+    margin-bottom: 10px;
+  }
+
+  .interview-box .tool-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .interview-box .pdf-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #007bff;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+
+  .interview-box .pdf-link::before {
+    content: "📄";
+    margin-right: 6px;
+  }
+
+  .interview-box .btn {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .interview-box {
+      padding: 15px;
+    }
+
+    .interview-box .tool-name {
+      font-size: 1rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- ✅ Show Job / Company info if available -->
+  {% if job %}
+  <div class="card shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h4 class="fw-bold">{{ job.title }}</h4>
+        <p class="text-muted">{{ job.company }}</p>
+        <p><i class="bi bi-geo-alt"></i> {{ job.location }} • {{ job.job_type }}</p>
+        <div>
+          {% for skill in job.skill_list %}
+          <span class="badge bg-success m-1">{{ skill }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="text-end">
+        <h5 class="text-primary">{{ job.salary_range }}</h5>
+        <p class="text-muted">{{ job.posted_days }}</p>
+
+        <!-- {% if course %}
+          <a href="{% url 'apply_job' job.id %}" 
+             class="btn btn-primary border-white" style="background-color: #172B85;">
+             Apply Now
+          </a>
+        {% else %}
+          <button class="btn btn-secondary" disabled>No Course Assigned</button>
+        {% endif %} -->
+      </div>
+    </div>
+    <hr>
+    <p class="mb-1">Posted: {{ job.posted_days }}</p>
+    <p class="mb-1">Openings: {{ job.openings }}</p>
+    <p class="mb-0">Applicants: {{ job.applicants }}</p>
+  </div>
+
+  <!-- Job Description -->
+  <div class="card shadow-sm p-4 mb-4">
+    <h5 class="fw-bold">Job Description</h5>
+    <h6 class="fw-bold mt-3">Roles and Responsibilities</h6>
+    <ul>
+      {% for line in responsibilities %}
+      <li>{{ line }}</li>
+      {% endfor %}
+    </ul>
+    <p><b>Role:</b> {{ job.role }}</p>
+    <p><b>Candidate Type:</b> {{ job.candidate_type }}</p>
+    <p><b>Employment Type:</b> {{ job.employment_type }}</p>
+    <p><b>Education UG:</b> {{ job.education }}</p>
+  </div>
+
+  <!-- About Company -->
+  <div class="card shadow-sm p-4">
+    <h5 class="fw-bold">About Company</h5>
+    <p>{{ job.about_company }}</p>
+  </div>
+  {% endif %}
+
+  <!-- Course Topics -->
+  <div class="container my-4">
+    {% for course in courses %}
+    <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
+      <div>
+        <h4 class="mb-2">{{ course.course_tools }}</h4>
+        <ol class="mb-0">
+          {% for t in course.topics.all %}
+          <li class="mb-1">{{ t.title }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+
+      {% if course.video_thumbnail %}
+      <div>
+        <img src="{{ course.video_thumbnail.url }}" alt="{{ course.name }} thumbnail"
+          class="img-fluid rounded shadow-sm" style="max-width: 500px; height: auto; margin-top: 20px;">
+      </div>
+      {% endif %}
+    </div>
+    <hr>
+    {% endfor %}
+  </div>
+
+
+  <!-- Job Preparation Videos -->
+{% comment %}
+Show Job Preparation Videos only for Standard/Premium plan users
+Handles plan names like "Premium Plan" or "Standard Plan"
+{% endcomment %}
+
+{% if user_plan %}
+    {% if "standard" in user_plan or "premium" in user_plan %}
+        <h5 class="mt-5 text-center fw-bold">Job Preparation Videos</h5>
+        <div class="row mt-3">
+            {% for v in job_videos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if v.thumbnail %}
+                            <img src="{{ v.thumbnail.url }}" class="card-img-top" alt="{{ v.title }}">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            <h6>{{ v.title }}</h6>
+                            <video width="100%" controls>
+                                <source src="{{ v.video_file.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center mt-3 text-danger">
+            Videos are available only for Standard and Premium plan users.
+        </p>
+    {% endif %}
+{% else %}
+    <p class="text-center mt-3 text-danger">
+        You do not have an active plan. Please choose a plan to access videos.
+    </p>
+{% endif %}
+
+  <!-- Interview Questions -->
+  <h5 class="mt-5 text-center fw-bold">Frequently Asked Interview Questions</h5>
+  <div class="row mt-3">
+    {% for q in interview_qs %}
+    <div class="col-md-4 text-center mb-3">
+      <div class="interview-box">
+        <img src="{{ q.icon.url }}" alt="{{ q.tool_name }} Icon">
+        <span class="tool-name">{{ q.tool_name }}</span>
+        <a href="{{ q.pdf_file.url }}" class="pdf-link" target="_blank">Interview Questions</a><br>
+        <a href="{{ q.pdf_file.url }}" download class="btn btn-primary btn-sm mt-2">Download</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Ask Your Doubts -->
+  <h5 class="mt-5 text-center fw-bold">Ask Your Doubts</h5>
+  <form method="POST" class="text-center">
+    {% csrf_token %}
+    <input type="text" name="name" class="form-control mb-2" placeholder="Your Name (optional)">
+    <input type="email" name="email" class="form-control mb-2" placeholder="Your Email (optional)">
+    <textarea name="doubt" rows="3" class="form-control mb-3" placeholder="Write your doubts..." required></textarea>
+    <button class="btn btn-primary">Submit</button>
+  </form>
+
+  <!-- Upcoming Session -->
+  {% if placement %}
+  <h5 class="mt-5 text-center fw-bold">Upcoming Live Placement Session</h5>
+  <p class="text-center">
+    <b>Date:</b> {{ placement.date }} <br>
+    <b>Time:</b> {{ placement.time }} <br>
+    <b>Session:</b> {{ placement.session_type }} <br>
+    <b>Mode:</b> {{ placement.mode }}
+  </p>
+  {% endif %}
+
+  <!-- Register Button -->
+  <div class="text-center mt-4">
+    <a href="#" class="btn btn-primary">Click To Register</a>
+  </div>
+</div>
+{% endblock %}

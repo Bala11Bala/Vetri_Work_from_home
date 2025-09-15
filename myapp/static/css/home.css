@@ -1,0 +1,143 @@
+/* Search Bar */
+.search-bar input,
+.search-bar select {
+  min-width: 180px; 
+}
+
+.search-bar button {
+  background-color: #0d3b9f;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.search-bar button:hover {
+  background-color: #092b74; 
+}
+
+/* Why Choose Us */
+.icon-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold; 
+}
+
+/* Default (Mobile first - smaller font) */
+h2, h3, h5 {
+  font-size: 1.25rem; /* ~20px */
+}
+
+p {
+  font-size: 0.95rem; /* ~15px */
+}
+
+    .feature-card {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+      background: #fff;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+
+    /* Buttons */
+    .btn-custom {
+      border-radius: 30px;
+      font-weight: 600;
+      padding: 8px 20px;
+    }
+
+   .banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  margin-top: 50px;
+}
+
+.banner .content {
+  max-width: 700px;
+  padding: 20px;
+}
+
+.banner .btn-custom {
+  border-radius: 30px;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+.watch-btn{
+    border: 2px solid #172B85;
+    color: #172B85;
+}
+
+/* Bigger font size on laptop */
+@media (min-width: 992px) {
+  .banner .content h2 {
+    font-size: 2.5rem;
+  }
+  .banner .content p {
+    font-size: 1.2rem;
+  }
+}
+
+    /* Font sizes: large on laptop, normal on mobile/tablet */
+    h2 {
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    @media (min-width: 992px) { /* Laptop and above */
+      h2 {
+        font-size: 2.2rem;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+    }
+
+/* Tablets and larger (≥768px) */
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2rem;   /* ~32px */
+  }
+  h3 {
+    font-size: 1.75rem; /* ~28px */
+  }
+  h5 {
+    font-size: 1.25rem; /* ~20px */
+  }
+  p {
+    font-size: 1.1rem;  /* ~17px */
+  }
+}
+
+/* Desktops (≥1200px) */
+@media (min-width: 1200px) {
+  h2 {
+    font-size: 2.5rem;   /* ~40px */
+  }
+  h3 {
+    font-size: 2rem;     /* ~32px */
+  }
+  h5 {
+    font-size: 1.5rem;   /* ~24px */
+  }
+  p {
+    font-size: 1.2rem;   /* ~19px */
+  }
+}
+

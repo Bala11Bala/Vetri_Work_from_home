@@ -1,0 +1,210 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+
+h2, h3 {
+  color: #222;
+}
+
+.card {
+  border-radius: 15px;
+}
+
+</style>
+{% endblock extra_css %}
+
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+<section class="py-5 text-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold">AI Resume Builder</h2>
+        <p class="text-muted">
+          Create professional resumes in minutes using AI
+            Optimize your reiume with pawerful keywords,
+            practice mock intervieus, and stand out in the job
+            morket.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <img src="{% static 'images/ai_resume.png' %}" 
+             alt="Resume AI" class="img-fluid rounded" width="500px">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h3 class="fw-bold mb-4">How It Works</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+          <img src="{% static 'images/user.png' %}" alt="image" class="mx-auto" width="50">
+          <h5 class="mt-2">Enter Personal Details</h5>
+          <p>Names, contact info, education, experience.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+          <img src="{% static 'images/pen.png' %}" alt="image" class="mx-auto" width="50">
+          <h5 class="mt-2">AI Resume Creation</h5>
+          <p>Instantly generate a resume with professional formatting.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+          <img src="{% static 'images/lens.png' %}" alt="image" class="mx-auto" width="50">
+          <h5 class="mt-2">Keyword Optimization</h5>
+          <p>AI scans job descriptions and adds the right keywords.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Get Started Form -->
+<section class="py-5">
+  <div class="container">
+    <h3 class="fw-bold text-center mb-4">Get Started Now</h3>
+    <p class="text-center mb-5" style="font-size: 20px;">Fill in your details ond let Al creote your perfect resume</p>
+    <div class="card shadow-lg p-4 mx-auto" style="max-width:800px;">
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" name="full_name" class="form-control" placeholder="Enter your Full Name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Experience Level</label>
+          <select name="experience_level" class="form-select">
+            <option>Entry Level</option>
+            <option>Mid Level</option>
+            <option>Senior Level</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Skills</label>
+          <input type="text" name="skills" class="form-control" placeholder="JavaScript, React, Node.js" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Career Highlights</label>
+          <textarea name="career_highlights" class="form-control" rows="3" placeholder="Your highlights" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Key Words</label>
+          <input type="text" name="keywords" class="form-control" placeholder="Keywords for role">
+        </div>
+        <button class="btn btn-primary w-100" style="background-color: #172B85;">Generate My Resume with AI</button>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- Resume Popup -->
+{% if data %}
+<section class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-4">Your AI Generated Resumes</h3>
+    <div class="row">
+      
+      <!-- Resume 1 (Classic Professional Format) -->
+      <div class="col-md-6">
+        <div class="card shadow p-4">
+          <h3 class="text-primary fw-bold">{{ data.full_name }}</h3>
+          <h6 class="text-muted">{{ data.experience_level }} Professional</h6>
+          <hr>
+          <h5 class="fw-bold">Professional Summary</h5>
+          <p>
+            Highly motivated {{ data.experience_level|lower }} professional with expertise in {{ data.skills }}. 
+            Proven ability to deliver results through innovative problem-solving and collaboration. 
+            Recognized for {{ data.career_highlights }} and bringing value to organizational goals.
+          </p>
+
+          <h5 class="fw-bold mt-3">Key Skills</h5>
+            <ul>
+            {% for skill in data.skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+            </ul>
+
+          <h5 class="fw-bold mt-3">Career Highlights</h5>
+          <p>{{ data.career_highlights }}</p>
+
+          {% if data.keywords %}
+          <h5 class="fw-bold mt-3">Core Keywords</h5>
+          <p>{{ data.keywords }}</p>
+          {% endif %}
+
+          <button class="btn btn-outline-primary w-100 mt-3" onclick="copyContent(this)">Copy Resume</button>
+        </div>
+      </div>
+
+      <!-- Resume 2 (Modern Concise Style) -->
+      <div class="col-md-6">
+        <div class="card shadow p-4 bg-light">
+          <h2 class="fw-bold">{{ data.full_name }}</h2>
+          <p class="text-secondary mb-2"><i>{{ data.experience_level }} | {{ data.skills }}</i></p>
+          <hr>
+          <h5 class="fw-bold">Profile</h5>
+          <p>
+            Dynamic and result-driven individual specializing in {{ data.skills }}. 
+            Adept at adapting quickly to new challenges and driving impactful results. 
+            Strong track record in {{ data.career_highlights }}.
+          </p>
+
+          <h5 class="fw-bold mt-3">Skills Snapshot</h5>
+            <div class="d-flex flex-wrap">
+            {% for skill in data.skills %}
+                <span class="badge bg-primary m-1">{{ skill }}</span>
+            {% endfor %}
+            </div>
+
+          <h5 class="fw-bold mt-3">Career Achievements</h5>
+          <ul>
+            <li>{{ data.career_highlights }}</li>
+            <li>Delivered multiple successful projects with measurable business impact.</li>
+            <li>Recognized for leadership and problem-solving skills.</li>
+          </ul>
+
+            {% if data.keywords %}
+            <h5 class="fw-bold mt-3">Target Keywords</h5>
+            <div>
+            {% for kw in data.keywords %}
+                <span class="badge bg-success m-1">{{ kw }}</span>
+            {% endfor %}
+            </div>
+            {% endif %}
+
+
+          <button class="btn btn-outline-success w-100 mt-3" onclick="copyContent(this)">Copy Resume</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+{% endblock content %}
+
+
+
+{% block script %}
+<script>
+function copyContent(btn) {
+  let text = btn.parentElement.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+      alert("Resume copied to clipboard!");
+  });
+}
+</script>
+{% endblock script %}
+

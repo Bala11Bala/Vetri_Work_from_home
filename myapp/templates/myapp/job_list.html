@@ -1,0 +1,84 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+
+{% block title %}
+    Job Page
+{% endblock title %}
+
+{% block content %}
+<div class="container my-4">
+  <h4 class="fw-bold mb-3">Featured Jobs</h4>
+  <p class="text-muted">{{ jobs.count }} jobs found</p>
+
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <div class="card p-3 mb-3">
+        <h6 class="fw-bold">Complete Your Profile</h6>
+        <p class="text-muted">Get 20x more job opportunities.</p>
+        <div class="progress mb-2">
+          <div class="progress-bar bg-primary" role="progressbar" 
+              style="width: {{ profile.completion_percentage }}%;">
+            {{ profile.completion_percentage }}%
+          </div>
+        </div>
+        <a href="{% url 'profile_dashboard' %}" class="btn btn-primary btn-sm w-100" style="background-color: #172B85;">Update Profile</a>
+      </div>
+
+      <div class="card p-3 mb-3">
+        <h6 class="fw-bold">Education Level</h6>
+        <div><input type="checkbox"> Bachelor's Degree</div>
+        <div><input type="checkbox"> Master's Degree</div>
+        <div><input type="checkbox"> Diploma</div>
+        <div><input type="checkbox"> 12th Pass</div>
+      </div>
+
+      <div class="card p-3 mb-3">
+        <h6 class="fw-bold">Get Job Alerts</h6>
+        <p class="text-muted small">Never miss opportunities matching your profile.</p>
+        <a href="#" class="btn btn-dark btn-sm w-100" style="background-color: #172B85;">Set Alerts</a>
+      </div>
+    </div>
+
+    <!-- Jobs List -->
+    <div class="col-md-9">
+      {% for job in jobs %}
+      <div class="card shadow-sm p-3 mb-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h6 class="fw-bold">{{ job.title }}</h6>
+            <p class="text-muted mb-1">{{ job.company }}</p>
+            <p class="mb-1">
+              <i class="bi bi-geo-alt"></i> {{ job.location }} • {{ job.job_type }}
+            </p>
+            <p class="text-muted small">{{ job.responsibilities|truncatechars:100 }}</p>
+            <div>
+              {% for skill in job.skill_list %}
+                <span class="badge bg-success m-1">{{ skill }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="text-end">
+            <p class="fw-bold text-primary">{{ job.salary_range }}</p>
+            <p class="text-muted small">{{ job.posted_days }}</p>
+            <a href="{% url 'job_detail' job.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+            <a href="{% url 'job_detail' job.id %}" class="btn btn-primary btn-sm border-white" style="background-color: #172B85;">Apply Now</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+
+{% endblock script %}

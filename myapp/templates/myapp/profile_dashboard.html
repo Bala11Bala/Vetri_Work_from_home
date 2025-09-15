@@ -1,0 +1,182 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .text-success{
+    background-color: rgb(185, 241, 185);
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+</style>
+{% endblock extra_css %}
+
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    
+    <!-- LEFT PANEL -->
+    <div class="col-md-4">
+      <div class="card p-3 mb-3 shadow-sm">
+        <h5>Complete Your Profile</h5>
+        <p class="text-muted">Profile Completion {{ profile.completion_percentage }}%</p>
+        <div class="progress">
+          <div class="progress-bar bg-primary" role="progressbar" style="width: {{ profile.completion_percentage }}%">
+            {{ profile.completion_percentage }}%
+          </div>
+        </div>
+        <hr>
+        <ul class="list-group">
+          <li class="list-group-item">Resume {% if profile.resume %}<span class="text-success">✔ Completed</span>{% endif %}</li>
+          <li class="list-group-item">Education {% if profile.education %}<span class="text-success">✔ Completed</span>{% endif %}</li>
+          <li class="list-group-item">IT Skills {% if profile.skill %}<span class="text-success">✔ Completed</span>{% endif %}</li>
+          <li class="list-group-item">Projects {% if profile.project_title %}<span class="text-success">✔ Completed</span>{% endif %}</li>
+          <li class="list-group-item">Career Profile {% if profile.current_role %}<span class="text-success">✔ Completed</span>{% endif %}</li>
+          <li class="list-group-item">Personal Details {% if profile.full_name %}<span class="text-success">✔ Completed</span>{% endif %}</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- RIGHT PANEL -->
+    <div class="col-md-8">
+      
+      <!-- Personal Form -->
+      <div class="card p-3 mb-3">
+        <h5>Personal Details</h5>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="section" value="personal">
+          <div class="row">
+            <div class="col-md-6"><input type="text" name="full_name" class="form-control mb-2" placeholder="Full Name" value="{{ profile.full_name|default_if_none:'' }}"></div>
+            <div class="col-md-6"><input type="email" name="email" class="form-control mb-2" placeholder="Email" value="{{ profile.email|default_if_none:'' }}"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6"><input type="text" name="mobile" class="form-control mb-2" placeholder="Mobile" value="{{ profile.mobile|default_if_none:'' }}"></div>
+            <div class="col-md-6"><input type="text" name="city" class="form-control mb-2" placeholder="City" value="{{ profile.city|default_if_none:'' }}"></div>
+          </div>
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+      <!-- Education Form -->
+      <div class="card p-3 mb-3">
+        <h5>Education</h5>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="section" value="education">
+          <input type="text" name="education" class="form-control mb-2" placeholder="Education" value="{{ profile.education|default_if_none:'' }}">
+          <input type="text" name="university" class="form-control mb-2" placeholder="University" value="{{ profile.university|default_if_none:'' }}">
+          <input type="text" name="course" class="form-control mb-2" placeholder="Course" value="{{ profile.course|default_if_none:'' }}">
+          <div class="row">
+            <div class="col-md-6"><input type="text" name="course_start" placeholder="Start Year" class="form-control" value="{{ profile.course_start|default_if_none:'' }}"></div>
+            <div class="col-md-6"><input type="text" name="course_end" placeholder="End Year" class="form-control" value="{{ profile.course_end|default_if_none:'' }}"></div>
+          </div>
+          <button class="btn btn-primary mt-2">Save</button>
+        </form>
+      </div>
+
+      <!-- IT Skills Form -->
+      <div class="card p-3 mb-3">
+        <h5>IT Skills</h5>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="section" value="skills">
+          <input type="text" name="skill" class="form-control mb-2" placeholder="Skill" value="{{ profile.skill|default_if_none:'' }}">
+          <input type="text" name="software" class="form-control mb-2" placeholder="Software" value="{{ profile.software|default_if_none:'' }}">
+          <input type="text" name="skill_experience" class="form-control mb-2" placeholder="Experience" value="{{ profile.skill_experience|default_if_none:'' }}">
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+      <!-- Projects Form -->
+      <div class="card p-3 mb-3">
+        <h5>Projects</h5>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="section" value="projects">
+          <input type="text" name="project_title" class="form-control mb-2" placeholder="Project Title" value="{{ profile.project_title|default_if_none:'' }}">
+          <input type="url" name="project_link" class="form-control mb-2" placeholder="Project Link" value="{{ profile.project_link|default_if_none:''   }}">
+          <textarea name="project_details" class="form-control mb-2" placeholder="Project Details">{{ profile.project_details|default_if_none:'' }}</textarea>
+          <label for="" class="mt-2"><b> Upload Your Sample Projects: </b></label>
+          <input type="file" name="project_file" class="form-control mb-2">
+          {% if profile.project_file %}
+            <p class="small text-success">Uploaded: <a href="{{ profile.project_file.url }}" target="_blank">View File</a></p>
+          {% endif %}
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+      <!-- Career Profile Form -->
+      <div class="card p-3 mb-3">
+        <h5>Career Profile</h5>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name="section" value="career">
+          <input type="text" name="current_industry" class="form-control mb-2" placeholder="Current Industry" value="{{ profile.current_industry|default_if_none:'' }}">
+          <input type="text" name="current_role" class="form-control mb-2" placeholder="Current Role" value="{{ profile.current_role|default_if_none:'' }}">
+          <div class="row">
+            <div class="col-md-6"><input type="text" name="exp_start" placeholder="Start Date" class="form-control" value="{{ profile.exp_start|default_if_none:'' }}"></div>
+            <div class="col-md-6"><input type="text" name="exp_end" placeholder="End Date" class="form-control" value="{{ profile.exp_end|default_if_none:'' }}"></div>
+          </div>
+          <label for="" class="mt-2"><b> Upload Experience Certificate: </b></label>
+          <input type="file" name="certificate" class="form-control mt-2"> 
+          {% if profile.certificate %}
+            <p class="small text-success">Uploaded: <a href="{{ profile.certificate.url }}" target="_blank">View Certificate</a></p>
+          {% endif %}
+          <button class="btn btn-primary mt-2">Save</button>
+        </form>
+      </div>
+
+      <!-- Resume Upload -->
+      <div class="card p-3 mb-3">
+        <h5>Resume Upload</h5>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <label for="" class="mt-2"><b> Upload Your Resume: </b></label>
+          <input type="hidden" name="section" value="resume">
+          <input type="file" name="resume" class="form-control mb-2">
+          {% if profile.resume %}
+            <p class="small text-success">Uploaded: <a href="{{ profile.resume.url }}" target="_blank">View Resume</a></p>
+          {% endif %}
+
+          <label for="" class="mt-2"><b> Upload Your Profile image: </b></label>
+          <input type="file" name="profile_image" class="form-control mb-2">
+          {% if profile.profile_image %}
+            <p class="small text-success">Profile Image Uploaded ✔</p>
+            <img src="{{ profile.profile_image.url }}" class="img-thumbnail" width="120">
+          {% endif %}
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+
+  {% if profile.plan %}
+<div class="alert alert-info mt-3">
+  <p><b>Plan:</b> {{ profile.plan.name }} (valid till {{ profile.plan_end }})</p>
+  <p><b>Remaining days:</b> {{ remaining_days }}</p>
+
+  {% if remaining_today is not None %}
+    <p><b>Today's remaining job applies:</b> {{ remaining_today }} / 5</p>
+  {% else %}
+    <p><b>Today's job applies:</b> Unlimited</p>
+  {% endif %}
+</div>
+{% endif %}
+
+
+</div>
+{% endblock content %}
+
+
+{% block script %}
+
+{% endblock script %}

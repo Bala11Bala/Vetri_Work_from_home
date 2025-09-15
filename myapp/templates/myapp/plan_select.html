@@ -1,0 +1,108 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .plan-card {
+  border-radius: 20px;
+  padding: 25px;
+  color: #fff;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  height: 100%;
+}
+
+.plan-card:hover {
+  transform: translateY(-8px);
+}
+
+.plan-basic {
+  background: linear-gradient(to right, #FF518D, #FFAB67);
+}
+
+.plan-standard {
+  background: linear-gradient(to right, #3F56F0, #00EFA9);
+}
+
+.plan-premium {
+  background: linear-gradient(to right, #005184, #ED6CCD);
+}
+
+.plan-card h4 {
+  font-weight: 700;
+}
+
+.plan-card h5 {
+  margin: 15px 0;
+  font-size: 1.3rem;
+}
+
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.plan-card ul li {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.plan-btn {
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+.current-btn {
+  background: #fff;
+  color: #333;
+}
+
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container py-5">
+  <h3 class="text-center fw-bold">Choose the Plan <span class="text-danger">*</span></h3>
+  <p class="text-center text-muted">Unlock premium features to accelerate your job search</p>
+
+  <div class="row justify-content-center mt-4">
+    {% for plan in plans %}
+      <div class="col-md-4 mb-4">
+        <div class="plan-card 
+            {% if plan.name == 'Basic' %} plan-basic 
+            {% elif plan.name == 'Standard Plan' %} plan-standard 
+            {% elif plan.name == 'Premium Plan' %} plan-premium 
+            {% endif %}
+            ">
+          
+          <h4>{{ plan.name }}</h4>
+          <h5>₹{{ plan.price }} / {{ plan.duration }}</h5>
+          
+          <ul>
+            {% for f in plan.feature_list %}
+              <li>✓ {{ f }}</li>
+            {% endfor %}
+          </ul>
+<!-- 
+          {% if plan.is_current %}
+            <button class="btn plan-btn current-btn">Current Plan</button>
+          {% else %}
+            <a href="{% url 'select_plan' plan.id %}" class="btn btn-light plan-btn">Choose Plan</a>
+          {% endif %} -->
+          <!-- inside your loop over plans in plan_select.html -->
+<form method="post" action="{% url 'plan_select' %}" style="display:inline;">
+  {% csrf_token %}
+  <input type="hidden" name="plan_id" value="{{ plan.id }}">
+  <button type="submit" class="btn btn-light plan-btn">Choose Plan</button>
+</form>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+

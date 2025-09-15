@@ -1,0 +1,48 @@
+{% load static %}
+
+
+<footer class="footer bg-light-custom py-5 mt-5">
+  <div class="container">
+    <div class="row">
+      <!-- Logo / Name -->
+      <div class="col-md-3 mb-4 mb-md-0">
+        <h5 class="fw-bold mb-2" style="color: #f4b400;">Vetri</h5>
+        <h6 class="fw-bold " style="color: #172B85;">Work From Home</h6>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-3 mb-4 mb-md-0">
+        <h6 class="fw-bold mb-3">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'home' %}" class="footer-link">Home</a></li>
+          <li><a href="#" class="footer-link">About</a></li>
+          <li><a href="#" class="footer-link">AI Tools</a></li>
+          <li><a href="{% url 'job_list' %}" class="footer-link">Jobs</a></li>
+        </ul>
+      </div>
+
+      <!-- AI Tools -->
+      <div class="col-md-3 mb-4 mb-md-0">
+        <h6 class="fw-bold mb-3">AI Tools</h6>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'bio_generator' %}" class="footer-link">Bio Generator</a></li>
+          <li><a href="{% url 'ai_mock_interview' %}" class="footer-link">Mock Interview</a></li>
+          <li><a href="{% url 'resume_builder' %}" class="footer-link">Resume Builder</a></li>
+          <li><a href="{% url 'job_search' %}" class="footer-link">Smart Apply</a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div class="col-md-3">
+        <h6 class="fw-bold mb-3">Connect With Us</h6>
+        <div class="d-flex gap-3">
+          <a href="#"><img src="{% static 'images/insta.png' %}" alt="Instagram" class="social-icon"></a>
+          <a href="#"><img src="{% static 'images/linkedin.png'%}" alt="LinkedIn" class="social-icon"></a>
+          <a href="#"><img src="{% static 'images/Facebook.png'%}" alt="Facebook" class="social-icon"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+   

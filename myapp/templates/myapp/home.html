@@ -1,0 +1,160 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock extra_css %}
+
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-7">
+        <h2 class="fw-bold">Find Your Dream <span class="text-success">Remote Job</span></h2>
+        <p class="text-muted">
+          Thousands of work-from-home opportunities are waiting for you. With smarter hiring and 
+          AI-powered features, we connect you to the right job faster, easier, and more efficiently.
+        </p>
+
+        <!-- Search Bar -->
+        <!-- <div class="d-flex flex-wrap bg-white p-2 shadow-sm rounded search-bar">
+          <input type="text" class="form-control me-2 mb-2 mb-md-0" placeholder="Job title, skills, or company">
+          <select class="form-select me-2 mb-2 mb-md-0">
+            <option selected>All Categories</option>
+            <option>IT</option>
+            <option>Marketing</option>
+            <option>Design</option>
+          </select>
+          <button class="btn btn-primary">🔍 Search</button>
+        </div> -->
+      </div>
+
+      <div class="col-md-5 text-center mt-4 mt-md-0">
+        <video class="img-fluid rounded" autoplay muted loop playsinline>
+        <source src="{% static 'images/4432816-uhd_3840_2160_25fps.mp4' %}" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h3 class="fw-bold text-success">Why Choose Us</h3>
+    <p class="text-muted">
+      Start your career journey with confidence. Our AI-powered tools help you create 
+      the perfect profile and land your first remote job.
+    </p>
+
+    <div class="row align-items-center mt-5">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img src="{% static 'images/home_2.png' %}" class="img-fluid rounded" alt="work from home" width="400">
+      </div>
+      <div class="col-md-6 text-start">
+        <div class="d-flex mb-4">
+          <span class="icon-check me-3 text-success fs-3"><img src="{% static 'images/one.png' %}" alt="img" width="50"></span>
+          <div>
+            <h5 class="fw-bold">Easy Resume Creation</h5>
+            <p class="text-muted mb-0">Build professional resumes in minutes with our AI Resume Builder</p>
+          </div>
+        </div><br>
+
+        <div class="d-flex mb-4">
+          <span class="icon-check me-3 text-success fs-3"><img src="{% static 'images/two.png' %}" alt="img" width="50"></span>
+          <div>
+            <h5 class="fw-bold">Professional Bio Generator</h5>
+            <p class="text-muted mb-0">Create compelling professional summaries that stand out</p>
+          </div>
+        </div><br>
+
+        <div class="d-flex">
+          <span class="icon-check me-3 text-success fs-3"><img src="{% static 'images/three.png' %}" alt="img" width="50"></span>
+          <div>
+            <h5 class="fw-bold">Mock Interview Practice</h5>
+            <p class="text-muted mb-0">Practice with AI and boost your confidence before real interviews</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <div class="container py-5">
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Top AI Features</h2>
+      <p class="text-muted">Our AI-powered job portal makes hiring faster, smarter, and more reliable matching recruiters with the right candidates instantly.</p>
+    </div>
+
+    <!-- Features Row -->
+    <div class="row g-4 mb-5">
+      <!-- Bio Generator -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <img src="{% static 'images/icon4.png' %}" alt="Bio Generator" class="feature-icon">
+          <h5 class="fw-bold">Bio Generator</h5>
+          <p>Create professional bios in seconds with AI-powered content generation tailored to your experience level.</p>
+          <a href="{% url 'bio_generator' %}" class="btn btn-primary btn-custom" style="background: linear-gradient(90deg, #3B82F6,#9333EA);">Try Now</a>
+        </div>
+      </div>
+      <!-- Mock Interview -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <img src="{% static 'images/icon3.png' %}" alt="Mock Interview" class="feature-icon">
+          <h5 class="fw-bold">Mock Interview</h5>
+          <p>Practice with AI-conducted interview sessions. Get instant feedback and improve your performance.</p>
+          <a href="{% url 'ai_mock_interview' %}" class="btn btn-success btn-custom" style="background: linear-gradient(90deg, #22C55E,#0D9488);">Start Practice</a>
+        </div>
+      </div>
+      <!-- Resume Builder -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <img src="{% static 'images/icon2.png' %}" alt="Resume Builder" class="feature-icon">
+          <h5 class="fw-bold">Resume Builder</h5>
+          <p>Generate polished, professional resumes instantly with our AI-powered resume creation tool.</p>
+          <a href="{% url 'resume_builder' %}" class="btn btn-danger btn-custom" style="background: linear-gradient(90deg, #F97316,#EC4899);">Build Resume</a>
+        </div>
+      </div>
+      <!-- AI Job Apply -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <img src="{% static 'images/icon1.png' %}" alt="AI Job Apply" class="feature-icon">
+          <h5 class="fw-bold">AI Job Apply</h5>
+          <p>Apply to jobs with AI-tailored cover letters or use traditional methods. Your choice, enhanced results.</p>
+          <a href="{% url 'job_search' %}" class="btn btn-purple btn-custom" style="background: linear-gradient(90deg, #A855F7,#EC4899);">Apply Smart</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Career Transform Section -->
+<div class="banner position-relative text-center">
+  <img src="{% static 'images/banner.png' %}" alt="Banner" class="img-fluid w-100">
+
+  <!-- Overlay content -->
+  <div class="content position-absolute top-50 start-50 translate-middle text-black">
+    <h2 class="fw-bold">Ready to Transform Your Career?</h2>
+    <p class="text-black">Join thousands of professionals who found their dream remote jobs with our AI-powered platform</p>
+    <a href="#" class="btn btn-primary btn-custom me-2">Get Started Free</a>
+    <a href="#" class="btn btn-custom watch-btn">Watch Demo</a>
+  </div>
+</div>
+
+  </div>
+
+{% endblock content %}
+
+
+
+{% block script %}
+
+{% endblock script %}

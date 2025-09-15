@@ -1,0 +1,248 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    /* Hero */
+.hero {
+  background: #fff;
+}
+.hero h1 {
+  font-size: 2.2rem;
+}
+@media (min-width: 992px) {
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+}
+
+/* Features Cards */
+.feature-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+.feature-icon {
+  width: 50px;
+  height: 50px;
+}
+
+/* Steps */
+.step-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+/* Sample Question */
+.bg-light-blue {
+  background-color: #e9f0ff;
+}
+.sample-box {
+  background: #1e2a38;
+  max-width: 600px;
+}
+
+/* Features grid */
+.feature-box {
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+h6, h2, p{
+    font-size: 1.3rem;
+}
+/* Responsive Text Sizes */
+@media (max-width: 992px) {
+h6, h2, p{
+    font-size: 1rem;
+}
+}
+
+</style>
+{% endblock extra_css %}
+
+
+{% block title %}
+    AI Mock Iterview
+{% endblock title %}
+
+
+
+{% block content %}
+
+<section class="hero py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1 class="fw-bold">AI-Powered Mock Interviews</h1>
+        <p class="lead text-muted">Practice with our intelligent Al interviewer and get instant feedback to ace your next job interview with confidence.</p>
+        <a href="#" class="btn btn-primary me-2">Start Free Mock Interview</a>
+        <a href="#" class="btn btn-outline-primary">See How It Works</a>
+      </div>
+      <div class="col-lg-5 text-center mt-4 mt-lg-0">
+        <img src="{% static 'images/mock.png' %}" alt="AI Interview" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What is AI Mock Interview -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold">What is an AI Mock Interview?</h2>
+    <p class="text-muted mb-5">A revolutionary way to practice and perfect your interview skills using artificial intelligence that simulates real interview scenarios.</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100">
+          <img src="{% static 'images/brain.png' %}" class="feature-icon mb-3" alt="">
+          <h5 class="fw-bold">AI-Powered Intelligence</h5>
+          <p class="text-muted">Our advanced Al analyzes your
+                                responses, body language, and
+                                communication patterns to provide
+                                personalized feedback and
+                                improvement suggestions.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100">
+          <img src="{% static 'images/clock.png' %}" class="feature-icon mb-3" alt="">
+          <h5 class="fw-bold">24/7 Availability</h5>
+          <p class="text-muted">Practice anytime, anywhere. No
+                                scheduling conflicts or waiting for
+                                human interviewers. Get instant access
+                                to unlimited mock interviews.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card p-4 h-100">
+          <img src="{% static 'images/graph.png' %}" class="feature-icon mb-3" alt="">
+          <h5 class="fw-bold">Performance Tracking</h5>
+          <p class="text-muted">Monitor your progress over time with
+                                detailed analytics, scoring metrics, and
+                                personalized improvement roadmaps.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold">How It Works</h2>
+    <p class="text-muted mb-5">Select from IT, HR, Marketing, Design, Sales, and 50+ other job categories.</p>
+    <div class="row g-4">
+      <div class="col-md-3 col-6">
+        <div class="step-card p-4 h-100">
+          <img src="{% static 'images/1.png' %}" alt="image" width="60">
+          <h5 class="fw-bold mt-2">Choose Your Role</h5>
+          <p class="text-muted">Choose from Fresher, Intermediate,
+                                or Experienced level questions
+                                tailored to your expertise.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="step-card p-4 h-100">
+          <img src="{% static 'images/2.png' %}" alt="image" width="60">
+          <h5 class="fw-bold mt-2">Set Difficulty</h5>
+          <p class="text-muted">Choose from beginner, intermediate, or expert level.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="step-card p-4 h-100">
+          <img src="{% static 'images/3.png' %}" alt="image" width="60">
+          <h5 class="fw-bold mt-2">Start Interview</h5>
+          <p class="text-muted">Choose from Fresher, Intermediate,
+                                or Experienced level questions
+                                tailored to your expertise.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="step-card p-4 h-100">
+          <img src="{% static 'images/4.png' %}" alt="image" width="60">
+          <h5 class="fw-bold mt-2">Get Feedback</h5>
+          <p class="text-muted">Receive instant scoring, detailed
+                                analysis, and personalized
+                                improvement suggestions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sample Question -->
+<section class="py-5 bg-light-blue">
+  <div class="container text-center">
+    <h2 class="fw-bold">Try a Sample Question</h2>
+    <p class="text-muted mb-4">Experience our AI Interviewer in action</p>
+    <div class="sample-box mx-auto p-4 rounded">
+      <p class="text-white mb-3">Tell me about a challenging project you worked on and how you overcame the difficulties.</p>
+      <a href="#" class="btn btn-primary me-2">Start Recording</a>
+      <a href="#" class="btn btn-outline-light">Show Hints</a>
+    </div>
+  </div>
+</section>
+
+<!-- Powerful Features -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold">Powerful Features</h2>
+    <p class="text-muted mb-5">Everything you need to ace your interviews</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-box p-4">
+          <img src="{% static 'images/robo.png' %}" alt="img">
+          <h6 class="fw-bold mt-2">AI Interview Process</h6>
+          <p class="text-muted">Realistic simulations with adaptive Al questioning.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4">
+          <img src="{% static 'images/mic.png' %}" alt="img">  
+          <h6 class="fw-bold mt-2">Job-Matched Practice</h6>
+          <p class="text-muted">Questions tailored to your specific job role and industry.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4">
+          <img src="{% static 'images/bulp.png' %}" alt="img">  
+          <h6 class="fw-bold mt-2">Resume Bias Detection</h6>
+          <p class="text-muted">Al detects potential resume gaps and offers improvements.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4">
+          <img src="{% static 'images/pie.png' %}" alt="img">  
+          <h6 class="fw-bold mt-2">Smart Scoring</h6>
+          <p class="text-muted">Instant scoring with insights on strengths and weaknesses.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4">
+          <img src="{% static 'images/docs.png' %}" alt="img">  
+          <h6 class="fw-bold mt-2">Detailed Reports</h6>
+          <p class="text-muted">Downloadable reports to track long-term progress.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4">
+          <img src="{% static 'images/wourld.png' %}" alt="img">  
+          <h6 class="fw-bold mt-2">Multi-Language</h6>
+          <p class="text-muted">Practice interviews in multiple global languages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+
+{% block script %}
+{% endblock script %}

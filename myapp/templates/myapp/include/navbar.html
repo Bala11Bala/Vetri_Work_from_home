@@ -1,0 +1,57 @@
+{% load static %}
+
+
+<!-- Bootstrap Navbar -->
+<nav class="navbar navbar-expand-lg" style="background-color: #fff3cd; border-radius: 12px;">
+  <div class="container-fluid">
+    
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold mx-5" href="{% url 'home' %}" style="font-size: 30px;">
+      <span style="color:#f4b400;">Vetri</span><br> <span style="color:#000;">Work From Home</span>
+    </a>
+
+    <!-- Toggle for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fa-solid fa-sliders"></i></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">   <!-- 🔹 mx-auto centers the items -->
+        <li class="nav-item mx-3">
+          <a class="nav-link fw-semibold text-dark" href="{% url 'job_list' %}" style="font-size: 20px; font-weight: bold;">Freshers</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link fw-semibold text-dark" href="{% url 'job_list' %}" style="font-size: 20px; font-weight: bold;">Experienced</a>
+        </li>
+{% if request.user.userprofile.plan %}
+  <li>
+    <a class="nav-link fw-semibold text-dark" 
+       href="{% url 'confirm_courses_course' course_id=1 %}" 
+       style="font-size: 20px; font-weight: bold;">My Plan</a>
+  </li>
+{% else %}
+  <li>
+    <a class="nav-link fw-semibold text-secondary disabled" 
+       href="javascript:void(0)" 
+       style="font-size: 20px; font-weight: bold; opacity:0.5; cursor:not-allowed;">
+       My Plan
+    </a>
+  </li>
+{% endif %}
+
+        <li class="nav-item mx-3">
+          <a class="nav-link fw-semibold text-dark" href="{% url 'profile_dashboard' %}" style="font-size: 20px; font-weight: bold;">My Profile</a>
+        </li>
+
+      </ul>
+
+      <!-- Register button aligned right -->
+      <a href="{% url 'register' %}" class="btn btn-primary fw-bold px-4 mx-5" style="background-color:#132f86; border:none; border-radius:8px;">
+        Register
+      </a>
+      <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket" style="background-color: #132f86; border-radius: 50%; padding: 10px; color: white; margin-right: 20px;"></i></a>
+    </div>
+  </div>
+</nav>

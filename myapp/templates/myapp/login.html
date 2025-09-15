@@ -1,0 +1,46 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock extra_css %}
+
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+  <div class="auth-card mx-auto mt-5">
+    <h3 class="text-center mb-3" style="color:#6a1b9a;">Login</h3>
+
+    <!-- Google Button -->
+    <button class="btn btn-light w-100 mb-3 border">
+      <img src="{% static 'images/google.png' %}" width="20" class="me-2"> Continue with Google
+    </button>
+
+    <div class="text-center text-muted mb-2">Or</div>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Email Id<span class="text-danger">*</span></label>
+        <input type="email" name="email" class="form-control" placeholder="Enter your Mail Id" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password<span class="text-danger">*</span></label>
+        <input type="password" name="password" class="form-control" placeholder="Enter the Password" required>
+      </div><br>
+
+      <p>Don’t have an account? <a href="{% url 'register' %}">Register</a></p>
+
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+  </div>
+{% endblock content %}
+
+
+
+{% block script %}
+
+{% endblock script %}

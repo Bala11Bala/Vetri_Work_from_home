@@ -1,0 +1,32 @@
+{% extends 'myapp/layouts/base.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+  <h2>Checkout</h2>
+  <p><b>Plan:</b> {{ plan.name }}</p>
+  <p><b>Price:</b> ₹{{ amount|floatformat:2 }}</p>
+
+  <button id="rzp-button1" class="btn btn-primary">Pay Now</button>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{ razorpay_key_id }}",
+    "amount": "{{ amount }}",
+    "currency": "{{ currency }}",
+    "name": "Your Company Name",
+    "description": "{{ plan.name }} Plan Payment",
+    "order_id": "{{ razorpay_order_id }}",
+    "callback_url": "{{ callback_url }}",
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock %}

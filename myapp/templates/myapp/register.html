@@ -1,0 +1,72 @@
+{% extends 'myapp/layouts/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock extra_css %}
+
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+  <div class="auth-card-lg d-flex mx-auto mt-5 mb-5">
+    <!-- Left Side -->
+    <div class="p-4 flex-fill text-center">
+      <h4 class="fw-bold" style="color:#132f86;">Create Your Account</h4>
+      <p class="text-muted small">
+        Start your career journey with us. Register now to explore thousands of job opportunities
+        tailored to your skills and interests.
+      </p>
+      <img src="{% static 'images/register.gif' %}" alt="Register Illustration" class="img-fluid" style="max-height:500px;">
+    </div>
+
+    <!-- Right Side -->
+    <div class="p-4 flex-fill">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">Full Name<span class="text-danger">*</span></label>
+          <input type="text" name="name" class="form-control" placeholder="Enter your Full Name" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email Id<span class="text-danger">*</span></label>
+          <input type="email" name="email" class="form-control" placeholder="Enter your Mail Id" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password<span class="text-danger">*</span></label>
+          <input type="password" name="password" class="form-control" placeholder="Enter the Password" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Mobile Number<span class="text-danger">*</span></label>
+          <input type="text" name="mobile" class="form-control" placeholder="Enter your Mobile Number" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Work Status<span class="text-danger">*</span></label>
+          <input type="text" name="status" class="form-control" placeholder="Experienced Or Fresher" required>
+        </div>
+
+        <div class="form-check mb-3">
+          <input type="checkbox" class="form-check-input" id="updates">
+          <label class="form-check-label small" for="updates">
+            Send me any Important Updates Via Messages, Mail
+          </label>
+        </div>
+
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+        <button type="submit" class="btn btn-primary w-100">Register Now</button>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+
+
+
+{% block script %}
+
+{% endblock script %}
