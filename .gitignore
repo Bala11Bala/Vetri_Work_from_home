@@ -1,0 +1,8 @@
+﻿# Django & Python gitignore
+*.pyc
+__pycache__/
+.venv/
+db.sqlite3
+*.log
+staticfiles/
+media/
